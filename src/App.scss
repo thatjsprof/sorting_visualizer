@@ -1,0 +1,55 @@
+.btn {
+  border-right: 0.2rem solid #ddd;
+  border-radius: 0rem;
+}
+
+.sorter {
+  &-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    border-right: 0.2rem solid #ddd;
+
+    p {
+      margin-bottom: 0rem !important;
+    }
+  }
+
+  &-type {
+    border-right: 0.2rem solid #ddd;
+
+    .v-btn:not(:last-child) {
+      margin-right: 1rem;
+    }
+  }
+}
+
+.v-input {
+  &__slider {
+    min-width: 20rem;
+    margin-top: 5rem;
+
+    .v-messages {
+      min-height: 0rem !important;
+    }
+  }
+
+  &__slot {
+    margin-bottom: 0rem !important;
+  }
+}
+
+.bars {
+  background-color: #fff;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+.bar {
+  padding-top: 0.5rem;
+  font-weight: 700;
+  display: inline-block;
+  background-color: rgba(66, 134, 244, 0.8);
+}
