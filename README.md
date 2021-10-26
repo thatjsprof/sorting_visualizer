@@ -1,24 +1,7 @@
-# sorting-visualizer
+# Sorting Visualizer
 
-## Project setup
-```
-npm install
-```
+## Bubble Sort
+Algorithm that iterates over each element in an array and bubbles the largest element to the top
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Currently Implemented
+1. Bubble Sort
