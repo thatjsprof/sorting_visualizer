@@ -2,7 +2,12 @@
   <v-app>
     <v-app-bar app color="primary" dark>
       <v-row align="center">
-        <v-btn text class="mr-3 btn" @click="generateNewArray">
+        <v-btn
+          text
+          class="mr-3 btn"
+          @click="generateNewArray"
+          :disabled="getRunning"
+        >
           Generate New Array
         </v-btn>
         <div class="sorter-box px-5">
@@ -12,6 +17,7 @@
             v-model="arraySize"
             :min="minArraySize"
             :max="maxArraySize"
+            :disabled="getRunning"
             color="orange darken3"
           ></v-slider>
         </div>
@@ -24,7 +30,7 @@
           >
           <v-btn
             @click="setSortType('quickSort')"
-            disabled
+            :disabled="getRunning"
             :style="getButtonColor('quickSort')"
             >Quick Sort</v-btn
           >
@@ -36,6 +42,7 @@
           >
           <v-btn
             @click="setSortType('bubbleSort')"
+            :disabled="getRunning"
             :style="getButtonColor('bubbleSort')"
             >Bubble Sort</v-btn
           >
@@ -44,7 +51,7 @@
           class="ml-6"
           color="orange darken3"
           @click="sortArray"
-          :disabled="!sortType"
+          :disabled="!sortType || getRunning"
           >Sort</v-btn
         >
       </v-row>
@@ -55,9 +62,12 @@
           class="bar"
           v-for="(value, index) in getCurrentArray"
           :style="
-            `margin-left: ${determineMargin()}; color: ${determineColor()}; background-color: ${determineBackgroundColor(
-              index
-            )}; width: ${determineWidth()}; height: ${determineHeight(index)}`
+            `margin-left: ${determineMargin()}; 
+             color: ${determineColor()}; 
+             background-color: ${determineBackgroundColor(index)}; 
+             width: ${determineWidth()}; 
+             height: ${determineHeight(index)}
+            `
           "
           :key="index"
         >
@@ -69,7 +79,13 @@
   </v-app>
 </template>
 <script>
-import { UtilFunctions, bubbleSort } from "./logic";
+import {
+  UtilFunctions,
+  bubbleSort,
+  quickSort,
+  mergeSort,
+  heapSort,
+} from "./logic";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
@@ -148,12 +164,19 @@ export default {
     },
     sortArray() {
       let sortAlgorithm =
-        this.sortType === "bubbleSort" ? bubbleSort : () => {};
+        this.sortType === "bubbleSort"
+          ? bubbleSort
+          : this.sortType === "quickSort"
+          ? quickSort
+          : this.sortType === "mergeSort"
+          ? mergeSort
+          : this.sortType === "heapSort"
+          ? heapSort
+          : () => {};
       const speed =
         570 - Math.pow(this.getCurrentArray.length, 2) > 0
           ? 570 - Math.pow(this.getCurrentArray.length, 2)
           : 0;
-      this.setRunning(true);
       sortAlgorithm(this.getCurrentArray, this.getAllActions, speed);
     },
   },

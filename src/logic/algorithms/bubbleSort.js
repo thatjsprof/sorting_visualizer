@@ -3,6 +3,8 @@ const swap = (arr, idx1, idx2) => {
 };
 
 const bubbleSort = (array, dispatch, speed) => {
+  dispatch().setRunning(true);
+
   let sorted = false,
     round = 0,
     arr = array.slice(0),
